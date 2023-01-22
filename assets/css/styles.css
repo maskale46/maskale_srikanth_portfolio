@@ -17,7 +17,7 @@
   --title-color: hsl(var(--hue-color), 8%, 15%);
   --text-color: hsl(var(--hue-color), 8%, 45%);
   --text-color-light: hsl(var(--hue-color), 8%, 65%);
-  --text-color-dark: hsl(var(--hue-color),90%, 100%);
+  --text-color-dark: hsl(var(--hue-color),90%, 100%);  
   --input-color: hsl(var(--hue-color), 70%, 96%);
   --body-color: hsl(var(--hue-color), 60%, 99%);
   --container-color: #fff;
@@ -300,7 +300,7 @@ img {
 }
 
 .home__blob-img {
-  width: 200px;
+  width: 200px;       /*170px*/
 }
 
 .home__data {
@@ -494,105 +494,82 @@ img {
   background-color: var(--first-color);
 }
 
+.skills__oic {
+  width: 90%;
+}
+
+.skills__odi {
+  width: 85%;
+}
+
+.skills__oda {
+  width: 90%;
+}
+
+.skills__bip {
+  width: 80%;
+}
+
+.skills__pcs {
+  width: 70%;
+}
+
 .skills__java {
   width: 90%;
 }
 
-.skills__selenium {
-  width: 95%;
-}
-
-.skills__appium {
-  width: 90%;
-}
-
-.skills__typescript {
-  width: 80%;
-}
-
-.skills__cypress {
-  width: 93%;
-}
-
 .skills__python {
-  width: 90%;
+  width: 75%;
 }
 
-.skills__pytest {
-  width: 95%;
-}
-
-.skills__postman {
-  width: 91%;
-}
-
-.skills__mysql {
-  width: 95%;
-}
-
-.skills__kafka {
-  width: 55%;
-}
-
-.skills__druid {
-  width: 55%;
-}
-
-.skills__api {
+.skills__nodejs {
   width: 85%;
 }
 
-.skills__performance {
-  width: 65%;
+.skills__sql {
+  width: 95%;
 }
 
-.skills__cucumber {
+.skills__plsql {
+  width: 75%;
+}
+
+.skills__restapi {
+  width: 80%;
+}
+
+.skills__soap {
+  width: 85%;
+}
+
+.skills__postman {
   width: 90%;
+}
+
+.skills__jira {
+  width: 50%;
 }
 
 .skills__git {
   width: 85%;
 }
 
-.skills__junit {
+.skills__netbeans {
   width: 80%;
-}
-
-.skills__testng {
-  width: 75%;
 }
 
 .skills__maven {
   width: 75%;
 }
 
-.skills__jira {
-  width: 85%;
-}
-
-.skills__azure {
-  width: 75%;
-}
-
-.skills__jenkins {
-  width: 70%;
-}
-
-.skills__kubernetes {
-  width: 50%;
-}
-
 .skills__docker {
-  width: 50%;
+  width: 35%;
 }
 
-.skills__grafana {
-  width: 91%;
+.skills__kubernates {
+  width: 30%;
 }
 
-.skills__jmeter {
-  width: 65%;
-}
 
 .skills__close .skills__list {
   height: 0;
