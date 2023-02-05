@@ -170,9 +170,73 @@ themeButton.addEventListener("click", () => {
   localStorage.setItem("selected-theme", getCurrentTheme());
   localStorage.setItem("selected-icon", getCurrentIcon());
 });
+//*=================================================Form Validation=& Form Submission====================================*
+//email submition
+//form validations
+document.querySelector(".button--send").addEventListener("click", function(event) {
+  event.preventDefault();
+  let fromcheck="";
+  let x = document.forms["myForm"]["name"].value;
+  let y = document.forms["myForm"]["email"].value;
+  let z = document.forms["myForm"]["message"].value;
+  if (x === "") {
+    fromcheck = 'false';
+    alert("Please fill out your name");
+  } else if (y === "" || !y.endsWith(".com")) {
+    fromcheck = 'false';
+    alert("EmailID is Invalid..");
+  } else if (z === ""){
+    fromcheck = 'false';
+    alert("Minimum characters needed.");
+  } else {
+    fromcheck = 'true';
+  }
+  
+  // Get the form data
+  if(fromcheck=="true"){
+  var formData = new FormData(document.getElementById("myForm"));
+  
+  fetch("https://getform.io/f/a96105f5-bf41-406b-b302-de09d3a2411b", {
+            method: "POST",
+            body: formData,
+            headers: {
+                "Accept": "application/json",
+            },
+        })
+        .then(response => alert("Thank you! I will get back you ASAP."))
+        .catch(error =>  alert("Oops... Something went wrong. " ))
+      }
+     // else { alert("Inputs are In-valid..")}
+    });
+//=================================================================================================
+  /*// Append additional data to the formData object
+  formData.append("service_id", "service_gvso8yp");
+  formData.append("template_id", "template_oyfe4if");
+  formData.append("user_id", "u6T33tMR33JblIPT2");
 
-//analysis 
+  // Send the form data to a server or API using an AJAX request
+  var xhr = new XMLHttpRequest();
+  xhr.open("POST", "https://api.emailjs.com/api/v1.0/email/send-form");
+  xhr.send(formData);
+
+  // Handle the response from the server
+  xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          alert("Your mail is sent!");
+      } else if (xhr.readyState === XMLHttpRequest.DONE) {
+          alert("Oops... " + xhr.responseText);
+      }
+  };
+});
+*/
+//Count 
+//Initialize a counter to track the number of visitors 
+//let visitorCount = 0; 
+// Update the visitor count when a new visitor loads the page 
+//document.addEventListener("DOMContentLoaded", function() { visitorCount++; console.log("Visitor count: " + visitorCount); }); 
+// Add code here to send the visitor count to a server or analytics service
 // Google Analytics 
 //<script> 
 //(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'G-Q43N23REY1', 'auto'); ga('send', 'pageview');
 
+//Please replace "UA-XXXXX-Y" with the actual tracking code
