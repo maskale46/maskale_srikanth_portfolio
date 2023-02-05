@@ -181,13 +181,13 @@ document.querySelector(".button--send").addEventListener("click", function(event
   let z = document.forms["myForm"]["message"].value;
   if (x === "") {
     fromcheck = 'false';
-    alert("Please fill out your name");
+    alert("Please enter your name.");
   } else if (y === "" || !y.endsWith(".com")) {
     fromcheck = 'false';
-    alert("EmailID is Invalid..");
+    alert("Email-ID is Invalid..");
   } else if (z === ""){
     fromcheck = 'false';
-    alert("Minimum characters needed.");
+    alert("Please fill in the message."");
   } else {
     fromcheck = 'true';
   }
