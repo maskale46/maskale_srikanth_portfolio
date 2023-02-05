@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-   <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q43N23REY1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -134,11 +134,11 @@
 
             <div class="home__data">
               <h1 class="home__title">Hey there,<br> I'm Maskale Srikanth</h1>
-              <h3 class="home__subtitle">Software Engineer </h3>
+              <h3 class="home__subtitle">Software Engineer</h3>
               <p class="home__description">
                 Experienced in Oracle Cloud Applcations.
               </p>
-              <a href="#contact" class="button button--flex">
+              <a href="#contact" class="button button--flex1">
                 Contact Me
                 <i class="uil uil-message button--flex button__icon"></i>
               </a>
@@ -170,8 +170,8 @@
               In addition to my programming skills, I have extensive experience with data migration, and SQL, as well as my experience in OIC, PCS, SOACS, ODA, PL/SQL, and MS Excel,
               
               I am known for my innovative problem-solving skills and eagerness to learn new technologies. I am a dedicated and ambitious professional, 
-              constantly seeking new opportunities to advance my career and achieve greater heights in my career. I hope you enjoy exploring my page and learning more about my experience and skills.
-            </p>
+              constantly seeking new opportunities to advance my career and achieve greater heights in my career. I hope you enjoy exploring my page and learning more about my experience and skills. </p>
+
             <div class="about__info">
               <div>
                 <span class="about__info-title">01+</span>
@@ -706,7 +706,7 @@
               </div>
             </div>
           </div>
-          <form action="" class="contact__form grid">
+          <form method="POST" accept-charset="UTF-8" class="contact__form grid" id="myForm">
             <div class="cantact__inputs grid">
               <div class="contact__content">
                 <label for="" class="contact__label">Name :</label>
@@ -714,6 +714,7 @@
                   type="text"
                   placeholder="Enter your Name"
                   class="contact__input"
+                  name="name"
                 />
               </div>
               <div class="contact__content">
@@ -722,21 +723,22 @@
                   type="email"
                   placeholder="Enter your e-mail"
                   class="contact__input"
+                  name="email"
                 />
               </div>
             </div>
-            <div class="contact__content">
+            <!--<div class="contact__content">
               <label for="" class="contact__label">Project Name :</label>
               <input
                 type="text"
                 placeholder="Project Name"
                 class="contact__input"
               />
-            </div>
+            </div> -->
             <div class="contact__content">
               <label for="" class="contact__label">Message :</label>
               <textarea
-                name=""
+                name="message"
                 id=""
                 cols="0"
                 rows="7"
@@ -745,9 +747,10 @@
               ></textarea>
             </div>
             <div>
-              <a href="#" class="button button--flex"
-                >Send Message &nbsp;<i class="uil uil-message contact__icon"></i
-              ></a>
+              <a href="#contact" class="button button--send">
+                Send Message &nbsp;
+                <i class="uil uil-message button--flex button__icon"></i>
+              </a>
             </div>
           </form>
         </div>
@@ -809,5 +812,5 @@
 
     <!--==================== MAIN JS ====================-->
     <script src="assets/js/main.js"></script>
-  </body>
+   </body>
 </html>
