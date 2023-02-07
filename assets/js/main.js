@@ -203,40 +203,93 @@ document.querySelector(".button--send").addEventListener("click", function(event
                 "Accept": "application/json",
             },
         })
-        .then(response => alert("Thank you! I will get back you ASAP."))
-        .catch(error =>  alert("Oops... Something went wrong. " ))
+        .then(response => {
+          window.location.href = "./assets/pages/thanks.html";
+          document.forms["myForm"]["name"].value='';
+          document.forms["myForm"]["email"].value='';
+          document.forms["myForm"]["message"].value='';
+         })// alert("Thank you! I will get back you ASAP.")
+        .catch(error =>  alert("Oops... Something went wrong. " ));
       }
      // else { alert("Inputs are In-valid..")}
-    });
-//=================================================================================================
-  /*// Append additional data to the formData object
-  formData.append("service_id", "service_gvso8yp");
-  formData.append("template_id", "template_oyfe4if");
-  formData.append("user_id", "u6T33tMR33JblIPT2");
+         });
 
-  // Send the form data to a server or API using an AJAX request
-  var xhr = new XMLHttpRequest();
-  xhr.open("POST", "https://api.emailjs.com/api/v1.0/email/send-form");
-  xhr.send(formData);
+//============================================================pic zoom out================================================
+  const elements = document.querySelectorAll('.home__img');
 
-  // Handle the response from the server
-  xhr.onreadystatechange = function() {
-      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-          alert("Your mail is sent!");
-      } else if (xhr.readyState === XMLHttpRequest.DONE) {
-          alert("Oops... " + xhr.responseText);
-      }
-  };
-});
-*/
-//Count 
-//Initialize a counter to track the number of visitors 
-//let visitorCount = 0; 
-// Update the visitor count when a new visitor loads the page 
-//document.addEventListener("DOMContentLoaded", function() { visitorCount++; console.log("Visitor count: " + visitorCount); }); 
-// Add code here to send the visitor count to a server or analytics service
-// Google Analytics 
-//<script> 
-//(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); ga('create', 'G-Q43N23REY1', 'auto'); ga('send', 'pageview');
+elements.forEach(element => {
+  element.addEventListener('mouseover', function() {
+    this.style.transform = 'scale(1.1)';
+   // this.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.5)';
+  });
+  element.addEventListener('mouseout', function() {
+    this.style.transform = 'scale(1)';
+ //   this.style.boxShadow = 'none';
+  });
+}); 
 
-//Please replace "UA-XXXXX-Y" with the actual tracking code
+//===========================================================Nav Logo======================================
+const elements1 = document.querySelectorAll('.nav__logo');
+
+elements1.forEach(element => {
+  element.addEventListener('mouseover', function() {
+    this.style.transform = 'scale(1.1)';
+  //  this.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.5)';
+  });
+  element.addEventListener('mouseout', function() {
+    this.style.transform = 'scale(1)';
+   // this.style.boxShadow = 'none';
+  });
+}); 
+//======================================================nav item=============================================
+const elements2 = document.querySelectorAll('.nav__item');
+
+elements2.forEach(element => {
+  element.addEventListener('mouseover', function() {
+    this.style.transform = 'scale(1.1)';
+  //  this.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.5)';
+  });
+  element.addEventListener('mouseout', function() {
+    this.style.transform = 'scale(1)';
+   // this.style.boxShadow = 'none';
+  });
+}); 
+//====================================================home-social======================================================
+const elements3 = document.querySelectorAll('.home__social-icon');
+
+elements3.forEach(element => {
+  element.addEventListener('mouseover', function() {
+    this.style.transform = 'scale(1.2)';
+    //this.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.5)';
+  });
+  element.addEventListener('mouseout', function() {
+    this.style.transform = 'scale(1)';
+   /// this.style.boxShadow = 'none';
+  });
+}); 
+//====================================================contactme======================================================
+const elements4 = document.querySelectorAll('.button--flex1');
+
+elements4.forEach(element => {
+  element.addEventListener('mouseover', function() {
+    this.style.transform = 'scale(1.1)';
+    this.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 0.8)';
+  });
+  element.addEventListener('mouseout', function() {
+    this.style.transform = 'scale(1)';
+    this.style.boxShadow = 'none';
+  });
+}); 
+//=====================================================about__img=======================================================
+const elements5 = document.querySelectorAll('.about__img');
+
+elements5.forEach(element => {
+  element.addEventListener('mouseover', function() {
+    this.style.transform = 'scale(1.1)';
+    this.style.boxShadow = '0px 0px 10px rgba(0, 0, 0, 1)';
+  });
+  element.addEventListener('mouseout', function() {
+    this.style.transform = 'scale(1)';
+    this.style.boxShadow = 'none';
+  });
+}); 
