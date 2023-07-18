@@ -519,6 +519,14 @@ img {
   width: 70%;
 }
 
+.skills__brm {
+  width: 35%;
+}
+
+.skills__pdc {
+  width: 50%;
+}
+
 .skills__java {
   width: 90%;
 }
