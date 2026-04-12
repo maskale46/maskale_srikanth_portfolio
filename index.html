@@ -25,6 +25,289 @@
 
   <title>Maskale Srikanth</title>
   <link rel="icon" href="assets/img/favicon.ico">
+<style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+     :root {
+      --wa-green:  #25D366;
+      --wa-dark:   #075E54;
+      --wa-light:  #DCF8C6;
+      --bg:        #0d0d0d;
+      --surface:   #161616;
+      --text:      #f0ede8;
+      --muted:     #888;
+      --radius:    18px;
+    }
+
+    /* ── Demo backdrop ── */
+    .demo-bg {
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 80%, rgba(37,211,102,.08) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 20%, rgba(7,94,84,.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+ 
+    .demo-label {
+      position: fixed; top: 30px; left: 50%; transform: translateX(-50%);
+      font-family: 'Syne', sans-serif;
+      font-size: .75rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--muted);
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.08);
+      padding: 6px 18px; border-radius: 100px;
+    }
+ 
+    .demo-hero {
+      text-align: center;
+      font-family: 'Syne', sans-serif;
+      user-select: none;
+    }
+    .demo-hero h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -.03em;
+      color: var(--text);
+    }
+    .demo-hero p {
+      margin-top: 1rem;
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 420px;
+    }
+ 
+    /* ═══════════════════════════════════════
+       WHATSAPP WIDGET
+    ═══════════════════════════════════════ */
+ 
+    /* Floating button */
+    #wa-btn {
+      position: fixed;
+      bottom: 32px; right: 32px;
+      width: 60px; height: 60px;
+      background: var(--wa-green);
+      border-radius: 50%;
+      border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 28px rgba(37,211,102,.45);
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s ease;
+      z-index: 1000;
+    }
+    #wa-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 12px 36px rgba(37,211,102,.55);
+    }
+    #wa-btn svg { width: 30px; height: 30px; }
+ 
+    /* Pulse ring */
+    #wa-btn::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      background: rgba(37,211,102,.25);
+      animation: pulse 2.4s ease-out infinite;
+    }
+    @keyframes pulse {
+      0%   { transform: scale(.85); opacity: .9; }
+      70%  { transform: scale(1.35); opacity: 0; }
+      100% { transform: scale(.85); opacity: 0; }
+    }
+ 
+    /* Badge */
+    #wa-badge {
+      position: absolute;
+      top: -4px; right: -4px;
+      width: 20px; height: 20px;
+      background: #ef4444;
+      color: #fff;
+      font-size: .65rem; font-weight: 700;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      border: 2px solid var(--bg);
+      animation: badge-pop .4s cubic-bezier(.34,1.56,.64,1) forwards;
+    }
+    @keyframes badge-pop {
+      from { transform: scale(0); }
+      to   { transform: scale(1); }
+    }
+ 
+    /* Chat panel */
+    #wa-panel {
+      position: fixed;
+      bottom: 108px; right: 32px;
+      width: 340px;
+      background: #fff;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,.35);
+      z-index: 999;
+      transform: scale(.85) translateY(20px);
+      transform-origin: bottom right;
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        transform .35s cubic-bezier(.34,1.56,.64,1),
+        opacity   .25s ease;
+    }
+    #wa-panel.open {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+      pointer-events: all;
+    }
+ 
+    /* Panel header */
+    .wa-header {
+      background: var(--wa-dark);
+      padding: 16px 18px;
+      display: flex; align-items: center; gap: 12px;
+      position: relative;
+    }
+    .wa-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--wa-green);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 1.1rem; color: #fff;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .wa-avatar::after {
+      content: '';
+      position: absolute;
+      bottom: 2px; right: 2px;
+      width: 10px; height: 10px;
+      background: #4ade80;
+      border-radius: 50%;
+      border: 2px solid var(--wa-dark);
+    }
+    .wa-header-info { flex: 1; }
+    .wa-header-info strong {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-size: .92rem; font-weight: 600; color: #fff;
+    }
+    .wa-header-info span {
+      font-size: .75rem; color: rgba(255,255,255,.65);
+    }
+    .wa-close {
+      background: none; border: none; cursor: pointer;
+      color: rgba(255,255,255,.6);
+      padding: 4px;
+      transition: color .2s;
+    }
+    .wa-close:hover { color: #fff; }
+ 
+    /* Chat body */
+    .wa-body {
+      background: #e5ddd5;
+      background-image:
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8bdb5' fill-opacity='0.25'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      padding: 16px 14px 12px;
+      min-height: 140px;
+    }
+    .wa-bubble {
+      background: #fff;
+      border-radius: 0 10px 10px 10px;
+      padding: 10px 14px;
+      max-width: 85%;
+      box-shadow: 0 1px 2px rgba(0,0,0,.12);
+      position: relative;
+      animation: bubble-in .4s cubic-bezier(.34,1.56,.64,1) forwards;
+    }
+    @keyframes bubble-in {
+      from { transform: translateY(10px) scale(.95); opacity: 0; }
+      to   { transform: none; opacity: 1; }
+    }
+    .wa-bubble::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -8px;
+      border: 8px solid transparent;
+      border-right-color: #fff;
+      border-top-color: #fff;
+    }
+    .wa-bubble p {
+      font-size: .88rem;
+      line-height: 1.55;
+      color: #111;
+    }
+    .wa-bubble time {
+      display: block;
+      text-align: right;
+      font-size: .68rem;
+      color: #999;
+      margin-top: 4px;
+    }
+ 
+    /* Input row */
+    .wa-footer {
+      background: #f0f0f0;
+      padding: 10px 12px;
+      display: flex; gap: 8px; align-items: flex-end;
+    }
+    #wa-input {
+      flex: 1;
+      background: #fff;
+      border: none; outline: none;
+      border-radius: 22px;
+      padding: 10px 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .88rem;
+      color: #111;
+      resize: none;
+      max-height: 120px;
+      line-height: 1.4;
+      box-shadow: 0 1px 3px rgba(0,0,0,.08);
+    }
+    #wa-input::placeholder { color: #aaa; }
+ 
+    #wa-send {
+      width: 42px; height: 42px; flex-shrink: 0;
+      background: var(--wa-green);
+      border: none; border-radius: 50%;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s, transform .15s;
+    }
+    #wa-send:hover { background: var(--wa-dark); transform: scale(1.05); }
+    #wa-send svg { width: 20px; height: 20px; }
+ 
+    /* Tooltip on hover */
+    #wa-tooltip {
+      position: fixed;
+      bottom: 102px; right: 100px;
+      background: #fff;
+      color: #111;
+      font-size: .82rem;
+      padding: 8px 14px;
+      border-radius: 100px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.2);
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(6px);
+      transition: opacity .25s, transform .25s;
+      pointer-events: none;
+    }
+    #wa-tooltip.show { opacity: 1; transform: translateX(0); }
+    #wa-tooltip::after {
+      content: '';
+      position: absolute;
+      right: -7px; top: 50%; transform: translateY(-50%);
+      border: 7px solid transparent;
+      border-left-color: #fff;
+    }
+ 
+    /* ── Responsive ── */
+    @media (max-width: 420px) {
+      #wa-panel { right: 16px; bottom: 96px; width: calc(100vw - 32px); }
+      #wa-btn   { right: 16px; bottom: 24px; }
+      #wa-tooltip { right: 80px; bottom: 90px; }
+    }
+  </style>
+
 </head>
 
 <body>
@@ -670,7 +953,123 @@
 
       </div>
     </section>
-
+<!-- ══════════════════════════════════
+     WIDGET MARKUP — copy from here
+══════════════════════════════════ -->
+ 
+<!-- Tooltip -->
+<div id="wa-tooltip">Chat with me on WhatsApp 👋</div>
+ 
+<!-- Floating Button -->
+<button id="wa-btn" aria-label="Open WhatsApp chat">
+  <!-- Badge -->
+  <span id="wa-badge">1</span>
+  <!-- WhatsApp icon -->
+  <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 3C8.82 3 3 8.82 3 16c0 2.36.63 4.6 1.73 6.54L3 29l6.64-1.7A13 13 0 0016 29c7.18 0 13-5.82 13-13S23.18 3 16 3z" fill="#fff"/>
+    <path d="M21.8 19.3c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51H11.7c-.2 0-.52.07-.79.37-.27.3-1.03 1.01-1.03 2.46s1.06 2.85 1.2 3.05c.15.2 2.08 3.18 5.04 4.46.7.3 1.25.48 1.68.62.7.22 1.34.19 1.84.11.56-.08 1.76-.72 2.01-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z" fill="#25D366"/>
+  </svg>
+</button>
+ 
+<!-- Chat Panel -->
+<div id="wa-panel" role="dialog" aria-label="WhatsApp chat">
+ 
+  <div class="wa-header">
+    <div class="wa-avatar">MS</div>
+    <div class="wa-header-info">
+      <strong>Maskale Srikanth</strong>
+      <span>Online</span>
+    </div>
+    <button class="wa-close" id="wa-close" aria-label="Close chat">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+ 
+  <div class="wa-body">
+    <div class="wa-bubble">
+      <p>👋 Hi there! I'm <strong>Maskale Srikanth</strong>. Happy to see you here. <br> How can I help you today? <br>Feel free to send me a message!</p>
+      <time id="wa-time"></time>
+    </div>
+  </div>
+ 
+  <div class="wa-footer">
+    <textarea
+      id="wa-input"
+      rows="1"
+      placeholder="Type a message…"
+      aria-label="Message input"
+    ></textarea>
+    <button id="wa-send" aria-label="Send message">
+      <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+      </svg>
+    </button>
+  </div>
+ 
+</div>
+ 
+<!-- ══════════════════════════════════
+     WIDGET SCRIPT — copy alongside
+══════════════════════════════════ -->
+<script>
+  // ─────────────────────────────────────
+  // CONFIGURATION — edit these two lines
+  // ─────────────────────────────────────
+  const WA_PHONE   = "919886903575";          // Your WhatsApp number (no + or spaces)
+  const WA_DEFAULT = "Hi! I visited your portfolio and I'd like to get in touch.";
+  // ─────────────────────────────────────
+ 
+  const btn     = document.getElementById('wa-btn');
+  const panel   = document.getElementById('wa-panel');
+  const closeEl = document.getElementById('wa-close');
+  const input   = document.getElementById('wa-input');
+  const send    = document.getElementById('wa-send');
+  const badge   = document.getElementById('wa-badge');
+  const tooltip = document.getElementById('wa-tooltip');
+  const timeEl  = document.getElementById('wa-time');
+ 
+  // Set bubble timestamp
+  const now = new Date();
+  timeEl.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+ 
+  // Tooltip on hover
+  btn.addEventListener('mouseenter', () => tooltip.classList.add('show'));
+  btn.addEventListener('mouseleave', () => tooltip.classList.remove('show'));
+ 
+  // Toggle panel
+  btn.addEventListener('click', () => {
+    const isOpen = panel.classList.toggle('open');
+    badge.style.display = 'none';
+    tooltip.classList.remove('show');
+    if (isOpen) { setTimeout(() => input.focus(), 350); }
+  });
+ 
+  closeEl.addEventListener('click', () => panel.classList.remove('open'));
+ 
+  // Auto-resize textarea
+  input.addEventListener('input', () => {
+    input.style.height = 'auto';
+    input.style.height = Math.min(input.scrollHeight, 120) + 'px';
+  });
+ 
+  // Send on Enter (Shift+Enter = newline)
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); openWhatsApp(); }
+  });
+  send.addEventListener('click', openWhatsApp);
+ 
+  function openWhatsApp() {
+    const msg = input.value.trim() || WA_DEFAULT;
+    const url = `https://wa.me/${WA_PHONE}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+    // Optional: close panel after send
+    panel.classList.remove('open');
+    input.value = '';
+    input.style.height = 'auto';
+  }
+</script>
     <!--==================== PORTFOLIO ====================-->
     <!-- <section class="portfolio section" id="portfolio"></section> -->
 
